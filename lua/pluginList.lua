@@ -314,4 +314,6 @@ return packer.startup(function()
          require("mappings").fugitive()
       end,
    }
+
+   use 'psliwka/vim-smoothie'
 end)
