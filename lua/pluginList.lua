@@ -140,14 +140,10 @@ return packer.startup(function()
    -- file managing , picker etc
    use {
       "kyazdani42/nvim-tree.lua",
-      cmd = "NvimTreeToggle",
       config = function()
-         require "plugins.nvimtree"
-      end,
-      setup = function()
-         require("mappings").nvimtree()
-      end,
-   }
+        require"nvim-tree".setup{}
+      end
+    }
 
    use {
       "kyazdani42/nvim-web-devicons",
@@ -316,4 +312,6 @@ return packer.startup(function()
    }
 
    use 'psliwka/vim-smoothie'
+  use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
+  use 'junegunn/fzf.vim'
 end)
