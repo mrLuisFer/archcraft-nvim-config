@@ -16,12 +16,6 @@ local opt = {}
 
 -- these mappings will only be called during initialization
 M.misc = function()
-   -- dont copy any deleted text , this is disabled by default so uncomment the below mappings if you want them
-   -- map("n", "dd", [=[ "_dd ]=], opt)
-   -- map("v", "dd", [=[ "_dd ]=], opt)
-   -- map("v", "x", [=[ "_x ]=], opt)
-   -- todo: this should be configurable via chadrc
-
    -- Don't copy the replaced text after pasting in visual mode
    map("v", "p", '"_dP', opt)
 
@@ -60,9 +54,14 @@ M.misc = function()
 
    -- ctrl + s to save file
    map("n", "<C-s>", ":w <CR>", opt)
-
    -- use ESC to turn off search highlighting
    map("n", "<Esc>", ":noh<CR>", opt)
+
+   --map("n", "<leader>w", ":w <CR>", opt)
+   map("n", "<SPACE>ff", ":DashboardFindFile<CR>", opt)
+   map("n", "<SPACE>fw", ":DashboardFindWord<CR>", opt)
+
+   map("n", "<SPACE>b", ":NvimTreeToggle<CR>", opt)
 
    -- navigation within insert mode
    local check_insertNav = require("utils").load_config().options.enable_insertNav
