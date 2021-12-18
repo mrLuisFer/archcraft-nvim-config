@@ -1,6 +1,5 @@
 local present1, lspconfig = pcall(require, "lspconfig")
-local present2, lspinstall = pcall(require, "lspinstall")
-if not (present1 or present2) then
+if not (present1) then
    return
 end
 
@@ -42,11 +41,20 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- lspInstall + lspconfig stuff
-
 local function setup_servers()
-   lspinstall.setup()
-   local servers = lspinstall.installed_servers()
+  local servers = {
+  	'pyright', 
+	'rust_analyzer', 
+	'tsserver',
+	'cssls',
+	'dockerls',
+	'emmet_ls',
+	'gopls',
+	'html',
+	'phpactor',
+	'svelte',
+	'vimls'
+  }
 
    for _, lang in pairs(servers) do
       if lang ~= "lua" then
@@ -82,12 +90,6 @@ local function setup_servers()
 end
 
 setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-lspinstall.post_install_hook = function()
-   setup_servers() -- reload installed servers
-   vim.cmd "bufdo e"
-end
 
 -- replace the default lsp diagnostic symbols
 function lspSymbol(name, icon)
